@@ -1,8 +1,12 @@
 from .card import Card
 
+SPADE = 'Spade'
+HEART = 'Heart'
+DIAMOND = 'Diamond'
+CLUB = 'Club'
+
 
 class Cards:
-    SPADE = 'Spade'
     spade_king = Card(SPADE, 13)
     spade_queen = Card(SPADE, 12)
     spade_jack = Card(SPADE, 11)
@@ -17,7 +21,6 @@ class Cards:
     spade_2 = Card(SPADE, 2)
     spade_ace = Card(SPADE, 1)
 
-    HEART = 'Heart'
     heart_king = Card(HEART, 13)
     heart_queen = Card(HEART, 12)
     heart_jack = Card(HEART, 11)
@@ -32,7 +35,6 @@ class Cards:
     heart_2 = Card(HEART, 2)
     heart_ace = Card(HEART, 1)
 
-    DIAMOND = 'Diamond'
     diamond_king = Card(DIAMOND, 13)
     diamond_queen = Card(DIAMOND, 12)
     diamond_jack = Card(DIAMOND, 11)
@@ -47,7 +49,6 @@ class Cards:
     diamond_2 = Card(DIAMOND, 2)
     diamond_ace = Card(DIAMOND, 1)
 
-    CLUB = 'Club'
     club_king = Card(CLUB, 13)
     club_queen = Card(CLUB, 12)
     club_jack = Card(CLUB, 11)
