@@ -20,11 +20,11 @@ class MyTestCase(unittest.TestCase):
         game_configurations.set_minimum_face_cards(minimum_face_cards)
 
     def test_bidding(self):
-        from ..Entities.player import Player
         from ..Entities.bidding import Bidding
         from ..Entities import suits
+        from ..Entities import player
         number_of_players = 5
-        players = tuple(Player() for _ in range(number_of_players))
+        players = player.create_players(number_of_players)
 
         bidding = Bidding()
         bidding.set_suit_weight(suits.CLUB, 0)
@@ -51,6 +51,30 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(bidding.napoleon, players[1])  # Now players[1] is napoleon
         self.assertEqual(bidding.minimum_face_cards, 6)
         self.assertEqual(bidding.trump, suits.HEART)
+
+    def test_game_interface(self):
+        from ..Entities.game import Game
+        from ..Entities.cards import Cards
+        from ..Entities import player
+
+        number_of_players = 5
+        number_of_turns_to_be_played = 10
+        players = player.create_players(number_of_players)
+        cards = Cards()
+
+        game = Game()
+        game.deal_cards()
+        for turn in range(number_of_turns_to_be_played):
+            game.play_card(players[0], cards.club_ace)
+            game.play_card(players[1], cards.club_2)
+            game.play_card(players[2], cards.club_3)
+            game.play_card(players[3], cards.club_4)
+            game.play_card(players[4], cards.club_5)
+            if game.is_over:
+                break
+
+        winners = game.get_winner_team()
+        print(winners)
 
 
 if __name__ == '__main__':
