@@ -1,4 +1,4 @@
-from ...Entities import Player
+from ...Entities.player import Player
 
 
 class Bid:
