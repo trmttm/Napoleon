@@ -3,10 +3,10 @@ from typing import Dict
 from typing import List
 
 from .bid import Bid
-from ..cards import CLUB
-from ..cards import DIAMOND
-from ..cards import HEART
-from ..cards import SPADE
+from ..suits import CLUB
+from ..suits import DIAMOND
+from ..suits import HEART
+from ..suits import SPADE
 from ..player import Player
 
 
