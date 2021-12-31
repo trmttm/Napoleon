@@ -2,7 +2,7 @@ import unittest
 
 
 class MyTestCase(unittest.TestCase):
-    def test_something(self):
+    def test_configurations(self):
         from ..Entities.game_config import GameConfigurations
         from ..Entities.cards import Cards
         from ..Entities.bidding import Bidding
