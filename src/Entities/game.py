@@ -24,11 +24,11 @@ class Game:
         pass
 
     def __repr__(self):
-        repr = ''
+        text = ''
         for n, (game_turn, player_card) in enumerate(self._played_cards.items()):
             played_cards = '|'.join(align_width(make_text(pc), 11) + ' ' * 1 for pc in player_card)
-            repr += f'\n{n}:    {played_cards}'
-        return repr
+            text += f'\n{n}:    {played_cards}'
+        return text
 
 
 def make_text(pc) -> str:
