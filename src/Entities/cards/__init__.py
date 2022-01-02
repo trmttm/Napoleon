@@ -1,3 +1,6 @@
+import random
+from typing import List
+
 from .card import Card
 from .. import suits
 
@@ -58,3 +61,72 @@ class Cards:
     club_3 = Card(suits.CLUB, 3)
     club_2 = Card(suits.CLUB, 2)
     club_ace = Card(suits.CLUB, 1)
+
+    joker = Card(suits.JOKER, 1)
+
+    def __init__(self, n_jokers: int = 1):
+        self._all_cards = (
+            self.spade_king,
+            self.spade_queen,
+            self.spade_jack,
+            self.spade_10,
+            self.spade_9,
+            self.spade_8,
+            self.spade_7,
+            self.spade_6,
+            self.spade_5,
+            self.spade_4,
+            self.spade_3,
+            self.spade_2,
+            self.spade_ace,
+            self.heart_king,
+            self.heart_queen,
+            self.heart_jack,
+            self.heart_10,
+            self.heart_9,
+            self.heart_8,
+            self.heart_7,
+            self.heart_6,
+            self.heart_5,
+            self.heart_4,
+            self.heart_3,
+            self.heart_2,
+            self.heart_ace,
+            self.diamond_king,
+            self.diamond_queen,
+            self.diamond_jack,
+            self.diamond_10,
+            self.diamond_9,
+            self.diamond_8,
+            self.diamond_7,
+            self.diamond_6,
+            self.diamond_5,
+            self.diamond_4,
+            self.diamond_3,
+            self.diamond_2,
+            self.diamond_ace,
+            self.club_king,
+            self.club_queen,
+            self.club_jack,
+            self.club_10,
+            self.club_9,
+            self.club_8,
+            self.club_7,
+            self.club_6,
+            self.club_5,
+            self.club_4,
+            self.club_3,
+            self.club_2,
+            self.club_ace,
+            self.joker,
+        )
+
+    def deal_cards(self, n_players: int, n_cards_per_player: int) -> List[List[Card]]:
+        all_cards = list(self._all_cards)
+        random.shuffle(all_cards)
+        dealt_cards = []
+        for n in range(n_players):
+            dealt_card = all_cards[n_cards_per_player * n:n_cards_per_player * (n + 1)]
+            dealt_cards.append(sorted(dealt_card))
+        dealt_cards.append(sorted(all_cards[n_cards_per_player * n_players:]))
+        return dealt_cards

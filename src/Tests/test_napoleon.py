@@ -62,19 +62,22 @@ class MyTestCase(unittest.TestCase):
         players = player.create_players(number_of_players)
         cards = Cards()
 
+        shuffled_cards = cards.deal_cards(number_of_players, 10)
+        for player, dealt_cards in zip(players, shuffled_cards):
+            player.set_cards(dealt_cards)
+
         game = Game()
-        game.deal_cards()
-        for turn in range(number_of_turns_to_be_played):
-            game.play_card(players[0], cards.club_ace)
-            game.play_card(players[1], cards.club_2)
-            game.play_card(players[2], cards.club_3)
-            game.play_card(players[3], cards.club_4)
-            game.play_card(players[4], cards.club_5)
+        for game_round in range(number_of_turns_to_be_played):
+            game.play_card(game_round, players[0], players[0].playable_cards[game_round])
+            game.play_card(game_round, players[1], players[1].playable_cards[game_round])
+            game.play_card(game_round, players[2], players[2].playable_cards[game_round])
+            game.play_card(game_round, players[3], players[3].playable_cards[game_round])
+            game.play_card(game_round, players[4], players[4].playable_cards[game_round])
             if game.is_over:
                 break
 
         winners = game.get_winner_team()
-        print(winners)
+        print(game)
 
 
 if __name__ == '__main__':
