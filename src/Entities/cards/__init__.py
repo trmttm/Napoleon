@@ -65,64 +65,68 @@ class Cards:
     joker = Card(suits.JOKER, 1)
 
     def __init__(self, n_jokers: int = 1):
-        self._all_cards = (
-            self.spade_king,
-            self.spade_queen,
-            self.spade_jack,
-            self.spade_10,
-            self.spade_9,
-            self.spade_8,
-            self.spade_7,
-            self.spade_6,
-            self.spade_5,
-            self.spade_4,
-            self.spade_3,
-            self.spade_2,
-            self.spade_ace,
-            self.heart_king,
-            self.heart_queen,
-            self.heart_jack,
-            self.heart_10,
-            self.heart_9,
-            self.heart_8,
-            self.heart_7,
-            self.heart_6,
-            self.heart_5,
-            self.heart_4,
-            self.heart_3,
-            self.heart_2,
-            self.heart_ace,
-            self.diamond_king,
-            self.diamond_queen,
-            self.diamond_jack,
-            self.diamond_10,
-            self.diamond_9,
-            self.diamond_8,
-            self.diamond_7,
-            self.diamond_6,
-            self.diamond_5,
-            self.diamond_4,
-            self.diamond_3,
-            self.diamond_2,
-            self.diamond_ace,
-            self.club_king,
-            self.club_queen,
-            self.club_jack,
-            self.club_10,
-            self.club_9,
-            self.club_8,
-            self.club_7,
-            self.club_6,
-            self.club_5,
-            self.club_4,
-            self.club_3,
-            self.club_2,
-            self.club_ace,
-            self.joker,
-        )
+        self._all_cards = {
+            (suits.SPADE, 13): self.spade_king,
+            (suits.SPADE, 12): self.spade_queen,
+            (suits.SPADE, 11): self.spade_jack,
+            (suits.SPADE, 10): self.spade_10,
+            (suits.SPADE, 9): self.spade_9,
+            (suits.SPADE, 8): self.spade_8,
+            (suits.SPADE, 7): self.spade_7,
+            (suits.SPADE, 6): self.spade_6,
+            (suits.SPADE, 5): self.spade_5,
+            (suits.SPADE, 4): self.spade_4,
+            (suits.SPADE, 3): self.spade_3,
+            (suits.SPADE, 2): self.spade_2,
+            (suits.SPADE, 1): self.spade_ace,
+
+            (suits.HEART, 13): self.heart_king,
+            (suits.HEART, 12): self.heart_queen,
+            (suits.HEART, 11): self.heart_jack,
+            (suits.HEART, 10): self.heart_10,
+            (suits.HEART, 9): self.heart_9,
+            (suits.HEART, 8): self.heart_8,
+            (suits.HEART, 7): self.heart_7,
+            (suits.HEART, 6): self.heart_6,
+            (suits.HEART, 5): self.heart_5,
+            (suits.HEART, 4): self.heart_4,
+            (suits.HEART, 3): self.heart_3,
+            (suits.HEART, 2): self.heart_2,
+            (suits.HEART, 1): self.heart_ace,
+
+            (suits.DIAMOND, 13): self.diamond_king,
+            (suits.DIAMOND, 12): self.diamond_queen,
+            (suits.DIAMOND, 11): self.diamond_jack,
+            (suits.DIAMOND, 10): self.diamond_10,
+            (suits.DIAMOND, 9): self.diamond_9,
+            (suits.DIAMOND, 8): self.diamond_8,
+            (suits.DIAMOND, 7): self.diamond_7,
+            (suits.DIAMOND, 6): self.diamond_6,
+            (suits.DIAMOND, 5): self.diamond_5,
+            (suits.DIAMOND, 4): self.diamond_4,
+            (suits.DIAMOND, 3): self.diamond_3,
+            (suits.DIAMOND, 2): self.diamond_2,
+            (suits.DIAMOND, 1): self.diamond_ace,
+
+            (suits.CLUB, 13): self.club_king,
+            (suits.CLUB, 12): self.club_queen,
+            (suits.CLUB, 11): self.club_jack,
+            (suits.CLUB, 10): self.club_10,
+            (suits.CLUB, 9): self.club_9,
+            (suits.CLUB, 8): self.club_8,
+            (suits.CLUB, 7): self.club_7,
+            (suits.CLUB, 6): self.club_6,
+            (suits.CLUB, 5): self.club_5,
+            (suits.CLUB, 4): self.club_4,
+            (suits.CLUB, 3): self.club_3,
+            (suits.CLUB, 2): self.club_2,
+            (suits.CLUB, 1): self.club_ace,
+
+            (suits.JOKER, 1): self.joker,
+        }
 
     def deal_cards(self, n_players: int, n_cards_per_player: int) -> List[List[Card]]:
-        all_cards = list(self._all_cards)
+        all_cards = list(self._all_cards.values())
         random.shuffle(all_cards)
         dealt_cards = []
         for n in range(n_players):
@@ -130,3 +134,6 @@ class Cards:
             dealt_cards.append(sorted(dealt_card))
         dealt_cards.append(sorted(all_cards[n_cards_per_player * n_players:]))
         return dealt_cards
+
+    def get(self, suit, number) -> Card:
+        return self._all_cards[(suit, number)]

@@ -6,12 +6,11 @@ from .cards import Card
 
 class Player:
     def __init__(self, name):
-        self._cards = None
+        self._cards: Iterable[Card] = ()
         self._name = name
 
-    @property
-    def playable_cards(self) -> Tuple[Card]:
-        return tuple(self._cards)
+    def chose_from_playable_cards(self, index_: int) -> Card:
+        return tuple(self._cards)[index_]
 
     def set_cards(self, cards: Iterable[Card]):
         self._cards = cards

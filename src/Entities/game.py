@@ -20,6 +20,12 @@ class Game:
     def is_over(self) -> bool:
         return False
 
+    def get_played_cards(self, game_round: int) -> Tuple[Card, ...]:
+        return tuple(card for (player, card) in self._played_cards[game_round])
+
+    def get_played_suits(self, game_round: int) -> tuple:
+        return tuple(card.suit for (player, card) in self._played_cards[game_round])
+
     def get_winner_team(self):
         pass
 

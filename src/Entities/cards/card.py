@@ -3,6 +3,10 @@ class Card:
         self._number = number
         self._suit = suit
 
+    @property
+    def suit(self):
+        return self._suit
+
     def __repr__(self) -> str:
         return f'{self._suit}{self._number}'
 
