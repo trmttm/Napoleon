@@ -26,9 +26,6 @@ class Game:
     def get_played_suits(self, game_round: int) -> tuple:
         return tuple(card.suit for (player, card) in self._played_cards[game_round])
 
-    def get_winner_team(self):
-        pass
-
     def __repr__(self):
         text = ''
         for n, (game_turn, player_card) in enumerate(self._played_cards.items()):

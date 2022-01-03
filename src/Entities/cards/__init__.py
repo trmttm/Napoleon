@@ -1,5 +1,6 @@
 import random
 from typing import List
+from typing import Tuple
 
 from .card import Card
 from .. import suits
@@ -137,3 +138,7 @@ class Cards:
 
     def get(self, suit, number) -> Card:
         return self._all_cards[(suit, number)]
+
+    @property
+    def all_cards(self) -> Tuple[Card, ...]:
+        return tuple(self._all_cards.values())

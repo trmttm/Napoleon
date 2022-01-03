@@ -4,6 +4,10 @@ class Card:
         self._suit = suit
 
     @property
+    def number(self) -> int:
+        return self._number
+
+    @property
     def suit(self):
         return self._suit
 
