@@ -10,6 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d89946b6-78c0-4478-8c36-da6a80bff2d9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/rule_register.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/rule_register.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interactor/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interactor/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/test_napoleon.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/test_napoleon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,29 +110,33 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2554" height="433" key="GridCell.Tab.0.bottom" timestamp="1641200382407">
+    <state x="1063" y="470" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1641204673075">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.bottom/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382407" />
-    <state width="2554" height="433" key="GridCell.Tab.0.center" timestamp="1641200382406">
+    <state x="1063" y="470" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/4.23.2556.1417@4.23.2556.1417" timestamp="1641204673075" />
+    <state width="2554" height="433" key="GridCell.Tab.0.bottom" timestamp="1641204744254">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.center/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382406" />
-    <state width="2554" height="433" key="GridCell.Tab.0.left" timestamp="1641200382406">
+    <state width="2554" height="433" key="GridCell.Tab.0.bottom/4.23.2556.1417@4.23.2556.1417" timestamp="1641204744254" />
+    <state width="2554" height="433" key="GridCell.Tab.0.center" timestamp="1641204744254">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.left/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382406" />
-    <state width="2554" height="433" key="GridCell.Tab.0.right" timestamp="1641200382407">
+    <state width="2554" height="433" key="GridCell.Tab.0.center/4.23.2556.1417@4.23.2556.1417" timestamp="1641204744254" />
+    <state width="2554" height="433" key="GridCell.Tab.0.left" timestamp="1641204744253">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.right/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382407" />
+    <state width="2554" height="433" key="GridCell.Tab.0.left/4.23.2556.1417@4.23.2556.1417" timestamp="1641204744253" />
+    <state width="2554" height="433" key="GridCell.Tab.0.right" timestamp="1641204744254">
+      <screen x="4" y="23" width="2556" height="1417" />
+    </state>
+    <state width="2554" height="433" key="GridCell.Tab.0.right/4.23.2556.1417@4.23.2556.1417" timestamp="1641204744254" />
     <state x="4" y="23" width="1278" height="1417" key="SettingsEditor" timestamp="1641198954412">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
     <state x="4" y="23" width="1278" height="1417" key="SettingsEditor/4.23.2556.1417@4.23.2556.1417" timestamp="1641198954412" />
-    <state width="498" height="398" key="SwitcherDM" timestamp="1641198997533">
+    <state width="498" height="398" key="SwitcherDM" timestamp="1641204743075">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="498" height="398" key="SwitcherDM/4.23.2556.1417@4.23.2556.1417" timestamp="1641198997533" />
+    <state width="498" height="398" key="SwitcherDM/4.23.2556.1417@4.23.2556.1417" timestamp="1641204743075" />
   </component>
 </project>
