@@ -59,11 +59,11 @@ class MyTestCase(unittest.TestCase):
         rules = Rules()
 
         def yoromeki(**kwargs) -> bool:
-            played_cards = kwargs.get('played_cards')
+            played_cards_ = kwargs.get('played_cards')
             spade = kwargs.get('spade')
             heart = kwargs.get('heart')
-            almighty_is_played = (spade, 1) in played_cards
-            hear_queen_is_played = (heart, 12) in played_cards
+            almighty_is_played = (spade, 1) in played_cards_
+            hear_queen_is_played = (heart, 12) in played_cards_
             return almighty_is_played and hear_queen_is_played
 
         rules.add_new_rule('Yoromeki', yoromeki, 800)
