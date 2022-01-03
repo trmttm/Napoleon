@@ -15,7 +15,8 @@ from ..Entities.score_keeper import ScoreKeeper
 
 
 class Interactor:
-    def __init__(self, n_players: int, n_turns: int):
+    def __init__(self, n_players: int, n_game_rounds: int):
+        self.total_number_of_game_rounds = n_game_rounds
         self.players = player.create_players(n_players)
         self.player_orders = impl.create_player_orders(n_players)
         self.bidding = impl.create_bidding()
@@ -24,7 +25,7 @@ class Interactor:
         self.score_keeper = ScoreKeeper(self.players)
         self.rules = Rules()
         self.rule_register = RuleRegiser(self.cards)
-        self.card_evaluator = CardEvaluator(n_turns, self.rules.score_table)
+        self.card_evaluator = CardEvaluator(n_game_rounds, self.rules.score_table)
 
         self._all_face_cards = None
         self.adjutant = None

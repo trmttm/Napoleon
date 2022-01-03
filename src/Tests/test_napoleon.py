@@ -60,9 +60,7 @@ class MyTestCase(unittest.TestCase):
         from ..Entities import suits
         from ..Interactor import Interactor
 
-        n_total_turns = 10
-        n_players = 5
-        interactor = Interactor(n_players, n_total_turns)
+        interactor = Interactor(5, 10)
         expected_player_order = {0: (0, 1, 2, 3, 4),
                                  1: (1, 2, 3, 4, 0),
                                  2: (2, 3, 4, 0, 1),
@@ -90,7 +88,7 @@ class MyTestCase(unittest.TestCase):
 
         napoleon_index = interactor.get_player_index(interactor.napoleon)
         interactor.set_starting_player_index(napoleon_index)
-        for game_round in range(n_total_turns):
+        for game_round in range(interactor.total_number_of_game_rounds):
             for turn, winning_player_index in enumerate(interactor.player_order):
                 player = interactor.get_player(winning_player_index)
                 choice = game_round  # arbitrary
