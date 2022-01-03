@@ -59,22 +59,6 @@ def get_local_suit(played_cards):
 
 
 class MyTestCase(unittest.TestCase):
-    def test_configurations(self):
-        from ..Entities.game_config import GameConfigurations
-        from ..Entities.cards import Cards
-        from ..Entities.bidding import Bidding
-
-        bidding = Bidding()
-        napoleon = bidding.napoleon
-        minimum_face_cards = bidding.minimum_face_cards
-
-        cards = Cards()
-        adjutant_card = cards.spade_ace
-
-        game_configurations = GameConfigurations()
-        game_configurations.set_napoleon(napoleon)
-        game_configurations.set_adjutant_card(adjutant_card)
-        game_configurations.set_minimum_face_cards(minimum_face_cards)
 
     def test_bidding(self):
         from ..Entities import suits
