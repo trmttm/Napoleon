@@ -1,6 +1,20 @@
 import unittest
 
 
+def yoromeki(**kwargs) -> bool:
+    played_cards_ = kwargs.get('played_cards')
+    spade = kwargs.get('spade')
+    heart = kwargs.get('heart')
+    almighty_is_played = (spade, 1) in played_cards_
+    hear_queen_is_played = (heart, 12) in played_cards_
+    return almighty_is_played and hear_queen_is_played
+
+
+plug_in_rules = [
+    ('Yoromeki', yoromeki, 800),
+]
+
+
 def get_local_suit(played_cards):
     from ..Entities import suits
     local_suit = played_cards[0].suit
@@ -41,6 +55,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(bidding.trump, suits.HEART)
 
     def test_game_interface(self):
+        # Set up
         from ..Entities.game import Game
         from ..Entities.cards import Cards
         from ..Entities import suits
@@ -52,34 +67,34 @@ class MyTestCase(unittest.TestCase):
         from .. import Interactor as interactor
 
         n_total_turns = 10
-
+        adjutant = None
         players = player.create_players(5)
+        player_orders = interactor.create_player_orders(len(players))
+        expected_player_order = {0: (0, 1, 2, 3, 4),
+                                 1: (1, 2, 3, 4, 0),
+                                 2: (2, 3, 4, 0, 1),
+                                 3: (3, 4, 0, 1, 2),
+                                 4: (4, 0, 1, 2, 3)}
+        self.assertEqual(player_orders, expected_player_order)
         cards = Cards()
         game = Game()
-        rules = Rules()
-
-        def yoromeki(**kwargs) -> bool:
-            played_cards_ = kwargs.get('played_cards')
-            spade = kwargs.get('spade')
-            heart = kwargs.get('heart')
-            almighty_is_played = (spade, 1) in played_cards_
-            hear_queen_is_played = (heart, 12) in played_cards_
-            return almighty_is_played and hear_queen_is_played
-
-        rules.add_new_rule('Yoromeki', yoromeki, 800)
-        rule_register = RuleRegiser(cards)
-        card_evaluator = CardEvaluator(n_total_turns, rules.score_table)
+        bidding = interactor.create_bidding()
         score_keeper = ScoreKeeper(players)
 
+        rules = Rules()
+        for rule_name, rule, score in plug_in_rules:
+            rules.add_new_rule(rule_name, rule, score)
+
+        rule_register = RuleRegiser(cards)
         all_face_cards = tuple(c for c in cards.all_cards if c.number in (1, 10, 11, 12, 13) and c.suit != suits.JOKER)
         for rule_name, rule in rules.default_rules.items():
             rule_register.add_a_rule(rule, rule_name)
 
-        interactor.shuffle_cards(cards, players)
-        adjutant = None
-        adjutant_card = cards.spade_ace
+        card_evaluator = CardEvaluator(n_total_turns, rules.score_table)
 
-        bidding = interactor.create_bidding()
+        # Game Play
+        interactor.shuffle_cards(cards, players)
+
         bidding.add_a_bid(players[0], suits.SPADE, 5)
         bidding.add_a_bid(players[1], suits.DIAMOND, 6)
         bidding.add_a_bid(players[2], suits.HEART, 6)
@@ -88,18 +103,11 @@ class MyTestCase(unittest.TestCase):
         napoleon = bidding.napoleon
         trump = bidding.trump
         minimum_face_cards = bidding.minimum_face_cards
+        adjutant_card = cards.spade_ace
 
         self.assertEqual(napoleon, players[0])
         self.assertEqual(trump, suits.SPADE)
         self.assertEqual(minimum_face_cards, 7)
-
-        player_orders = interactor.create_player_orders(len(players))
-        expected_player_order = {0: (0, 1, 2, 3, 4),
-                                 1: (1, 2, 3, 4, 0),
-                                 2: (2, 3, 4, 0, 1),
-                                 3: (3, 4, 0, 1, 2),
-                                 4: (4, 0, 1, 2, 3)}
-        self.assertEqual(player_orders, expected_player_order)
 
         starting_player_index = players.index(napoleon)
         for game_round in range(n_total_turns):
@@ -144,8 +152,9 @@ class MyTestCase(unittest.TestCase):
             winning_card_turn = played_cards.index(winning_card)
             player_index = player_order[winning_card_turn]
             winning_player = players[player_index]
-            face_cards = tuple(card for card in played_cards if card in all_face_cards)
-            score_keeper.assign_face_cards(winning_player, face_cards)
+            face_cards_obtained = tuple(card for card in played_cards if card in all_face_cards)
+
+            score_keeper.assign_face_cards(winning_player, face_cards_obtained)
             starting_player_index = player_index
             print(score_keeper)
 

@@ -9,7 +9,9 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d89946b6-78c0-4478-8c36-da6a80bff2d9" name="Changes" comment="" />
+    <list default="true" id="d89946b6-78c0-4478-8c36-da6a80bff2d9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Tests/test_napoleon.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/test_napoleon.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +92,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -105,22 +107,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2554" height="433" key="GridCell.Tab.0.bottom" timestamp="1641199125697">
+    <state width="2554" height="433" key="GridCell.Tab.0.bottom" timestamp="1641200382407">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.bottom/4.23.2556.1417@4.23.2556.1417" timestamp="1641199125697" />
-    <state width="2554" height="433" key="GridCell.Tab.0.center" timestamp="1641199125696">
+    <state width="2554" height="433" key="GridCell.Tab.0.bottom/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382407" />
+    <state width="2554" height="433" key="GridCell.Tab.0.center" timestamp="1641200382406">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.center/4.23.2556.1417@4.23.2556.1417" timestamp="1641199125696" />
-    <state width="2554" height="433" key="GridCell.Tab.0.left" timestamp="1641199125696">
+    <state width="2554" height="433" key="GridCell.Tab.0.center/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382406" />
+    <state width="2554" height="433" key="GridCell.Tab.0.left" timestamp="1641200382406">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.left/4.23.2556.1417@4.23.2556.1417" timestamp="1641199125696" />
-    <state width="2554" height="433" key="GridCell.Tab.0.right" timestamp="1641199125697">
+    <state width="2554" height="433" key="GridCell.Tab.0.left/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382406" />
+    <state width="2554" height="433" key="GridCell.Tab.0.right" timestamp="1641200382407">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
-    <state width="2554" height="433" key="GridCell.Tab.0.right/4.23.2556.1417@4.23.2556.1417" timestamp="1641199125697" />
+    <state width="2554" height="433" key="GridCell.Tab.0.right/4.23.2556.1417@4.23.2556.1417" timestamp="1641200382407" />
     <state x="4" y="23" width="1278" height="1417" key="SettingsEditor" timestamp="1641198954412">
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
@@ -129,17 +131,5 @@
       <screen x="4" y="23" width="2556" height="1417" />
     </state>
     <state width="498" height="398" key="SwitcherDM/4.23.2556.1417@4.23.2556.1417" timestamp="1641198997533" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="rule_name == 'Yoromeki'" language="Python" />
-          <url>file://$PROJECT_DIR$/src/Tests/test_napoleon.py</url>
-          <line>140</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
