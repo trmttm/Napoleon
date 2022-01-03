@@ -4,7 +4,6 @@ from typing import Tuple
 from ..Entities import suits
 from ..Entities.bidding import Bidding
 from ..Entities.cards import Cards
-from ..Entities.game import Game
 from ..Entities.player import Player
 
 

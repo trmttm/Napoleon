@@ -1,55 +1,6 @@
 import unittest
 
 
-def the_card_is_all_mighty(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    number = kwargs.get('number')
-    spade = kwargs.get('spade')
-    return (suit == spade) and (number == 1)
-
-
-def started_with_joker(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    number = kwargs.get('number')
-    joker = kwargs.get('joker')
-    game_round = kwargs.get('game_round')
-    return (game_round == 0) and (suit == joker) and (number == 1)
-
-
-def same_two_applies(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    number = kwargs.get('number')
-    played_suits = kwargs.get('played_suits')
-    all_suits_are_the_same = len(set(played_suits)) == 1
-    return (suit == suit) and (number == 2) and all_suits_are_the_same
-
-
-def is_a_face_jack(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    number = kwargs.get('number')
-    trump = kwargs.get('trump')
-    return (suit == trump) and (number == 11)
-
-
-def is_a_reverse_jack(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    number = kwargs.get('number')
-    reverse = kwargs.get('reverse')
-    return (suit == reverse) and (number == 11)
-
-
-def is_a_trump(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    trump = kwargs.get('trump')
-    return suit == trump
-
-
-def is_a_local_suit(**kwargs) -> bool:
-    suit = kwargs.get('suit')
-    local_suit = kwargs.get('local_suit')
-    return suit == local_suit
-
-
 def get_local_suit(played_cards):
     from ..Entities import suits
     local_suit = played_cards[0].suit
@@ -95,13 +46,34 @@ class MyTestCase(unittest.TestCase):
         from ..Entities import suits
         from ..Entities import player
         from ..Entities.card_evaluator import CardEvaluator
-        from ..Entities.game_rules import GameRules
+        from ..Entities.rule_register import RuleRegiser
         from ..Entities.score_keeper import ScoreKeeper
+        from ..Entities.rules import Rules
         from .. import Interactor as interactor
 
         n_total_turns = 10
+
         players = player.create_players(5)
         cards = Cards()
+        game = Game()
+        rules = Rules()
+
+        def yoromeki(**kwargs) -> bool:
+            played_cards = kwargs.get('played_cards')
+            spade = kwargs.get('spade')
+            heart = kwargs.get('heart')
+            almighty_is_played = (spade, 1) in played_cards
+            hear_queen_is_played = (heart, 12) in played_cards
+            return almighty_is_played and hear_queen_is_played
+
+        rules.add_new_rule('Yoromeki', yoromeki, 800)
+        rule_register = RuleRegiser(cards)
+        card_evaluator = CardEvaluator(n_total_turns, rules.score_table)
+        score_keeper = ScoreKeeper(players)
+
+        all_face_cards = tuple(c for c in cards.all_cards if c.number in (1, 10, 11, 12, 13) and c.suit != suits.JOKER)
+        for rule_name, rule in rules.default_rules.items():
+            rule_register.add_a_rule(rule, rule_name)
 
         interactor.shuffle_cards(cards, players)
         adjutant = None
@@ -121,7 +93,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(trump, suits.SPADE)
         self.assertEqual(minimum_face_cards, 7)
 
-        game = Game()
         player_orders = interactor.create_player_orders(len(players))
         expected_player_order = {0: (0, 1, 2, 3, 4),
                                  1: (1, 2, 3, 4, 0),
@@ -129,36 +100,6 @@ class MyTestCase(unittest.TestCase):
                                  3: (3, 4, 0, 1, 2),
                                  4: (4, 0, 1, 2, 3)}
         self.assertEqual(player_orders, expected_player_order)
-
-        score_all_mighty = 'all_mighty'
-        score_joker = 'jack'
-        score_same_two = 'same_two'
-        score_face_jack = 'face_jack'
-        score_reverse_jack = 'reverse_jack'
-        score_trump = 'trump'
-        score_local_suit = 'local_suit'
-        score_table = {
-            score_all_mighty: 700,
-            score_joker: 600,
-            score_same_two: 500,
-            score_face_jack: 400,
-            score_reverse_jack: 300,
-            score_trump: 200,
-            score_local_suit: 100,
-        }
-        card_evaluator = CardEvaluator(n_total_turns, score_table)
-
-        score_keeper = ScoreKeeper(players)
-
-        all_face_cards = tuple(c for c in cards.all_cards if c.number in (1, 10, 11, 12, 13) and c.suit != suits.JOKER)
-        game_rules = GameRules(cards)
-        game_rules.add_a_rule(the_card_is_all_mighty, score_all_mighty)
-        game_rules.add_a_rule(started_with_joker, score_joker)
-        game_rules.add_a_rule(same_two_applies, score_same_two)
-        game_rules.add_a_rule(is_a_face_jack, score_face_jack)
-        game_rules.add_a_rule(is_a_reverse_jack, score_reverse_jack)
-        game_rules.add_a_rule(is_a_trump, score_trump)
-        game_rules.add_a_rule(is_a_local_suit, score_local_suit)
 
         starting_player_index = players.index(napoleon)
         for game_round in range(n_total_turns):
@@ -186,18 +127,18 @@ class MyTestCase(unittest.TestCase):
                     'trump': trump,
                     'local_suit': local_suit,
                     'played_suits': played_suits,
-                    'played_cards': played_cards,
+                    'played_cards': tuple((c.suit, c.number) for c in played_cards),
                     'spade': suits.SPADE,
                     'heart': suits.HEART,
                     'diamond': suits.DIAMOND,
                     'club': suits.CLUB,
                     'joker': suits.JOKER,
                 }
-                for condition, score_key in zip(game_rules.conditions, game_rules.score_keys):
+                for condition, rule_name in zip(rule_register.conditions, rule_register.score_keys):
                     if condition(**data_transfer_object):
-                        card_evaluator.assign_score(card, score_key, game_round)
-                        if score_key not in (score_local_suit, score_trump):
-                            print(f'{game_round}: {card} is a {score_key}')
+                        card_evaluator.assign_score(card, rule_name, game_round)
+                        if rule_name not in (rules.local_suit, rules.trump):
+                            print(f'{game_round}: {card} is a {rule_name}')
 
             winning_card = card_evaluator.get_winning_card(game_round)
             winning_card_turn = played_cards.index(winning_card)
@@ -206,6 +147,7 @@ class MyTestCase(unittest.TestCase):
             face_cards = tuple(card for card in played_cards if card in all_face_cards)
             score_keeper.assign_face_cards(winning_player, face_cards)
             starting_player_index = player_index
+            print(score_keeper)
 
         print(game)
         print(score_keeper)

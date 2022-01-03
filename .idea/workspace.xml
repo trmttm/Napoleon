@@ -82,4 +82,16 @@
     </task>
     <servers />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="rule_name == 'Yoromeki'" language="Python" />
+          <url>file://$PROJECT_DIR$/src/Tests/test_napoleon.py</url>
+          <line>140</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>

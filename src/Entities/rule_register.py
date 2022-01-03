@@ -1,11 +1,10 @@
 from typing import Callable
 from typing import List
 
-from .cards import Card
 from .cards import Cards
 
 
-class GameRules:
+class RuleRegiser:
     def __init__(self, cards: Cards):
         self._cards = cards
         self._conditions: List[Callable[[dict], bool]] = []
