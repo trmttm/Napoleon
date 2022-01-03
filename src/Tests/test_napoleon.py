@@ -1,7 +1,5 @@
 import unittest
 
-import src.Interactor.implementations
-
 
 def yoromeki(**kwargs) -> bool:
     played_cards_ = kwargs.get('played_cards')
@@ -30,10 +28,11 @@ class MyTestCase(unittest.TestCase):
     def test_bidding(self):
         from ..Entities import suits
         from ..Entities import player
+        from ..Interactor import implementations as impl
         number_of_players = 5
         players = player.create_players(number_of_players)
 
-        bidding = src.Interactor.implementations.create_bidding()
+        bidding = impl.create_bidding()
 
         bidding.add_a_bid(players[0], suits.SPADE, 5)
         self.assertEqual(bidding.napoleon, players[0])
