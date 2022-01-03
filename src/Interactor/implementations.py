@@ -2,6 +2,7 @@ from typing import Dict
 from typing import Tuple
 
 from src.Entities import suits
+from src.Entities import suits
 from src.Entities.bidding import Bidding
 from src.Entities.cards import Card
 from src.Entities.cards import Cards
@@ -38,3 +39,10 @@ def get_winning_player_index(played_cards: Tuple[Card, ...], player_order: Tuple
     winning_card_turn = played_cards.index(winning_card)
     winning_player_index = player_order[winning_card_turn]
     return winning_player_index
+
+
+def get_local_suit(played_cards):
+    local_suit = played_cards[0].suit
+    if local_suit == suits.JOKER:
+        local_suit = played_cards[1].suit
+    return local_suit

@@ -15,14 +15,6 @@ plug_in_rules = [
 ]
 
 
-def get_local_suit(played_cards):
-    from ..Entities import suits
-    local_suit = played_cards[0].suit
-    if local_suit == suits.JOKER:
-        local_suit = played_cards[1].suit
-    return local_suit
-
-
 class MyTestCase(unittest.TestCase):
 
     def test_bidding(self):
@@ -59,28 +51,24 @@ class MyTestCase(unittest.TestCase):
         from ..Entities import suits
         from ..Interactor import Interactor
 
-        interactor = Interactor(5, 10)
-        expected_player_order = {0: (0, 1, 2, 3, 4),
-                                 1: (1, 2, 3, 4, 0),
-                                 2: (2, 3, 4, 0, 1),
-                                 3: (3, 4, 0, 1, 2),
-                                 4: (4, 0, 1, 2, 3)}
-        self.assertEqual(interactor.player_orders, expected_player_order)
-        cards = interactor.cards
+        def get_all_face_cards(cards_):
+            return tuple(c for c in cards_.all_cards if c.number in (1, 10, 11, 12, 13) and c.suit != suits.JOKER)
 
-        interactor.plug_in_rules(plug_in_rules)
-        all_face_cards = tuple(c for c in cards.all_cards if c.number in (1, 10, 11, 12, 13) and c.suit != suits.JOKER)
+        interactor = Interactor(5, 10)
+        cards = interactor.cards
+        all_face_cards = get_all_face_cards(cards)
         interactor.set_all_face_cards(all_face_cards)
+        interactor.plug_in_rules(plug_in_rules)
+        self._test_expected_player_order(interactor)
+
         # Game Play
         interactor.shuffle_cards()
-
         interactor.add_a_bid(interactor.get_player(0), suits.SPADE, 5)
         interactor.add_a_bid(interactor.get_player(1), suits.DIAMOND, 6)
         interactor.add_a_bid(interactor.get_player(2), suits.HEART, 6)
         interactor.add_a_bid(interactor.get_player(3), suits.CLUB, 7)
         interactor.add_a_bid(interactor.get_player(0), suits.SPADE, 7)
         adjutant_card = cards.spade_ace
-
         self.assertEqual(interactor.napoleon, interactor.get_player(0))
         self.assertEqual(interactor.trump, suits.SPADE)
         self.assertEqual(interactor.minimum_face_cards, 7)
@@ -88,8 +76,8 @@ class MyTestCase(unittest.TestCase):
         napoleon_index = interactor.get_player_index(interactor.napoleon)
         interactor.set_starting_player_index(napoleon_index)
         for game_round in range(interactor.total_number_of_game_rounds):
-            for turn, winning_player_index in enumerate(interactor.player_order):
-                player = interactor.get_player(winning_player_index)
+            for turn, player_index in enumerate(interactor.player_order):
+                player = interactor.get_player(player_index)
                 choice = game_round  # arbitrary
                 card_played = player.chose_from_playable_cards(choice)
                 interactor.play_card(game_round, player, card_played)
@@ -99,7 +87,7 @@ class MyTestCase(unittest.TestCase):
             # Evaluate game_round
             played_suits = interactor.get_played_suits(game_round)
             played_cards = interactor.get_played_cards(game_round)
-            local_suit = get_local_suit(played_cards)
+            local_suit = interactor.get_local_suit(game_round)
 
             for turn, card in enumerate(played_cards):
                 data_transfer_object = {
@@ -145,6 +133,14 @@ class MyTestCase(unittest.TestCase):
             print('Napoleon Army won!')
         else:
             print('Alliance won!')
+
+    def _test_expected_player_order(self, interactor):
+        expected_player_order = {0: (0, 1, 2, 3, 4),
+                                 1: (1, 2, 3, 4, 0),
+                                 2: (2, 3, 4, 0, 1),
+                                 3: (3, 4, 0, 1, 2),
+                                 4: (4, 0, 1, 2, 3)}
+        self.assertEqual(interactor.player_orders, expected_player_order)
 
 
 if __name__ == '__main__':

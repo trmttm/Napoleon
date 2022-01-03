@@ -90,6 +90,9 @@ class Interactor:
     def get_played_suits(self, game_round: int) -> tuple:
         return self.game.get_played_suits(game_round)
 
+    def get_local_suit(self, game_round: int):
+        return impl.get_local_suit(self.get_played_cards(game_round))
+
     def assign_score(self, card: Card, rule_name, game_round: int):
         self.card_evaluator.assign_score(card, rule_name, game_round)
 
