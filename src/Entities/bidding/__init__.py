@@ -3,10 +3,7 @@ from typing import Dict
 from typing import List
 
 from .bid import Bid
-from ..suits import CLUB
-from ..suits import DIAMOND
-from ..suits import HEART
-from ..suits import SPADE
+from .. import suits
 from ..player import Player
 
 
@@ -14,10 +11,10 @@ class Bidding:
     def __init__(self):
         self._bidding_data: List[Bid] = []
         self._suit_weight: Dict[Any, int] = {
-            SPADE: 0,
-            HEART: 0,
-            DIAMOND: 0,
-            CLUB: 0,
+            suits.SPADE: 0,
+            suits.HEART: 0,
+            suits.DIAMOND: 0,
+            suits.CLUB: 0,
         }
 
     def set_suit_weight(self, suit, weight: int):
