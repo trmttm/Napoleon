@@ -30,7 +30,6 @@ class MyTestCase(unittest.TestCase):
     def test_bidding(self):
         from ..Entities import suits
         from ..Entities import player
-        from .. import Interactor as interactor
         number_of_players = 5
         players = player.create_players(number_of_players)
 
@@ -62,7 +61,8 @@ class MyTestCase(unittest.TestCase):
         from ..Interactor import Interactor
 
         n_total_turns = 10
-        interactor = Interactor(5, n_total_turns)
+        n_players = 5
+        interactor = Interactor(n_players, n_total_turns)
         expected_player_order = {0: (0, 1, 2, 3, 4),
                                  1: (1, 2, 3, 4, 0),
                                  2: (2, 3, 4, 0, 1),
