@@ -73,6 +73,9 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(interactor.trump, suits.SPADE)
         self.assertEqual(interactor.minimum_face_cards, 7)
 
+        remaining_cards = interactor.remaining_cards
+        print(remaining_cards)
+
         napoleon_index = interactor.get_player_index(interactor.napoleon)
         interactor.set_starting_player_index(napoleon_index)
         for game_round in range(interactor.total_number_of_game_rounds):

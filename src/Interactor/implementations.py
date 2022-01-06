@@ -1,11 +1,14 @@
 from typing import Dict
 from typing import Tuple
+from typing import Tuple
 
 from src.Entities import suits
 from src.Entities import suits
 from src.Entities.bidding import Bidding
 from src.Entities.cards import Card
 from src.Entities.cards import Cards
+from src.Entities.cards import Cards
+from src.Entities.player import Player
 from src.Entities.player import Player
 
 
@@ -46,3 +49,11 @@ def get_local_suit(played_cards):
     if local_suit == suits.JOKER:
         local_suit = played_cards[1].suit
     return local_suit
+
+
+def get_remaining_cards(cards: Cards, players: Tuple[Player, ...]):
+    dealt_cards = []
+    for player in players:
+        dealt_cards += list(player.cards)
+    remaining_cards = set(cards.all_cards) - set(dealt_cards)
+    return tuple(remaining_cards)

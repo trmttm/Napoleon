@@ -15,6 +15,10 @@ class Player:
     def set_cards(self, cards: Iterable[Card]):
         self._cards = cards
 
+    @property
+    def cards(self) -> Iterable[Card]:
+        return self._cards
+
     def __repr__(self) -> str:
         return f'{self._name}'
 

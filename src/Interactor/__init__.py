@@ -49,14 +49,20 @@ class Interactor:
     def get_player(self, index_: int) -> Player:
         return self.players[index_]
 
-    def get_player_index(self, player: Player) -> int:
-        return self.players.index(player)
+    def get_player_index(self, player_: Player) -> int:
+        return self.players.index(player_)
 
     def shuffle_cards(self):
         impl.shuffle_cards(self.cards, self.players)
 
-    def add_a_bid(self, player: Player, suit, minimum_face_cards: int):
-        self.bidding.add_a_bid(player, suit, minimum_face_cards)
+    @property
+    def remaining_cards(self) -> Tuple[Card, ...]:
+        players = self.players
+        cards = self.cards
+        return impl.get_remaining_cards(cards, players)
+
+    def add_a_bid(self, player_: Player, suit, minimum_face_cards: int):
+        self.bidding.add_a_bid(player_, suit, minimum_face_cards)
 
     @property
     def napoleon(self) -> Player:
@@ -81,8 +87,8 @@ class Interactor:
     def player_order(self) -> Tuple[int, ...]:
         return self.player_orders[self.starting_player_index]
 
-    def play_card(self, game_round: int, player: Player, card: Card):
-        self.game.play_card(game_round, player, card)
+    def play_card(self, game_round: int, player_: Player, card: Card):
+        self.game.play_card(game_round, player_, card)
 
     def get_played_cards(self, game_round: int) -> Tuple[Card, ...]:
         return self.game.get_played_cards(game_round)
