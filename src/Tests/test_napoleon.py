@@ -81,7 +81,7 @@ class MyTestCase(unittest.TestCase):
         for game_round in range(interactor.total_number_of_game_rounds):
             for turn, player_index in enumerate(interactor.player_order):
                 player = interactor.get_player(player_index)
-                choice = game_round  # arbitrary
+                choice = 0
                 card_played = player.chose_from_playable_cards(choice)
                 interactor.play_card(game_round, player, card_played)
                 if card_played == adjutant_card:
@@ -118,19 +118,19 @@ class MyTestCase(unittest.TestCase):
             face_cards_obtained = interactor.face_cards_obtained(game_round)
             interactor.assign_face_cards(winning_player_index, face_cards_obtained)
             interactor.set_starting_player_index(winning_player_index)
-            print(interactor.score_keeper)
+            print(interactor._score_keeper)
 
         # Game over
-        print(interactor.game)
-        print(interactor.score_keeper)
+        print(interactor._game)
+        print(interactor._score_keeper)
         print()
 
         napoleon_score = interactor.get_score(interactor.napoleon)
-        adjutant_score = interactor.get_score(interactor.adjutant)
+        adjutant_score = interactor.get_score(interactor._adjutant)
         napoleon_army_score = napoleon_score + adjutant_score
 
         print(f'Napoleon [{interactor.napoleon}] scored {napoleon_score}')
-        print(f'Adjutant [{interactor.adjutant}] scored {adjutant_score}')
+        print(f'Adjutant [{interactor._adjutant}] scored {adjutant_score}')
         print(f'Napoleon Army scored {napoleon_army_score} vs minimum face cards {interactor.minimum_face_cards}')
         if napoleon_army_score >= interactor.minimum_face_cards:
             print('Napoleon Army won!')
@@ -143,7 +143,7 @@ class MyTestCase(unittest.TestCase):
                                  2: (2, 3, 4, 0, 1),
                                  3: (3, 4, 0, 1, 2),
                                  4: (4, 0, 1, 2, 3)}
-        self.assertEqual(interactor.player_orders, expected_player_order)
+        self.assertEqual(interactor._player_orders, expected_player_order)
 
     def test_main(self):
         from ..Interactor import Interactor
@@ -152,9 +152,11 @@ class MyTestCase(unittest.TestCase):
         def get_all_face_cards(cards_):
             return tuple(c for c in cards_.all_cards if c.number in (1, 10, 11, 12, 13) and c.suit != suits.JOKER)
 
-        # number_of_players = int(input('How many players? '))
-        number_of_players = 5
-        interactor = Interactor(number_of_players, 10)
+        interactor = Interactor(5, 10)
+        interactor.present_setting_screen()
+        number_of_players = int(input('Set number'))
+        interactor.set_number_of_players(number_of_players)
+
         all_face_cards = get_all_face_cards(interactor.cards)
         interactor.set_all_face_cards(all_face_cards)
         interactor.plug_in_rules(plug_in_rules)
@@ -176,7 +178,7 @@ class MyTestCase(unittest.TestCase):
                 print(f'Player{interactor.napoleon} is Napoleon!')
 
         suit, number = input('Input adjutant card 1)suit and 2) number.').split(',')
-        adjutant_card = interactor.cards.get(suit, int(number))
+        adjutant_card = interactor.get_card(suit, int(number))
         print(f'Adjutant is {adjutant_card}\n')
 
         napoleon_cards = list(interactor.napoleon.cards) + list(interactor.remaining_cards)
@@ -237,19 +239,19 @@ class MyTestCase(unittest.TestCase):
             interactor.assign_face_cards(winning_player_index, face_cards_obtained)
             interactor.set_starting_player_index(winning_player_index)
             print(f'Player{winning_player_index} has won. Obtained {face_cards_obtained}')
-            print(interactor.score_keeper)
+            print(interactor._score_keeper)
 
         # Game over
-        print(interactor.game)
-        print(interactor.score_keeper)
+        print(interactor._game)
+        print(interactor._score_keeper)
         print()
 
         napoleon_score = interactor.get_score(interactor.napoleon)
-        adjutant_score = interactor.get_score(interactor.adjutant)
+        adjutant_score = interactor.get_score(interactor._adjutant)
         napoleon_army_score = napoleon_score + adjutant_score
 
         print(f'Napoleon [{interactor.napoleon}] scored {napoleon_score}')
-        print(f'Adjutant [{interactor.adjutant}] scored {adjutant_score}')
+        print(f'Adjutant [{interactor._adjutant}] scored {adjutant_score}')
         print(f'Napoleon Army scored {napoleon_army_score} vs minimum face cards {interactor.minimum_face_cards}')
         if napoleon_army_score >= interactor.minimum_face_cards:
             print('Napoleon Army won!')

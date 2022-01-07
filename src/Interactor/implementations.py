@@ -1,15 +1,15 @@
+from typing import Callable
 from typing import Dict
-from typing import Tuple
+from typing import List
 from typing import Tuple
 
-from src.Entities import suits
-from src.Entities import suits
-from src.Entities.bidding import Bidding
-from src.Entities.cards import Card
-from src.Entities.cards import Cards
-from src.Entities.cards import Cards
-from src.Entities.player import Player
-from src.Entities.player import Player
+from ..Entities import suits
+from ..Entities.bidding import Bidding
+from ..Entities.cards import Card
+from ..Entities.cards import Cards
+from ..Entities.player import Player
+from ..Entities.rule_register import RuleRegiser
+from ..Entities.rules import Rules
 
 
 def create_bidding() -> Bidding:
@@ -57,3 +57,10 @@ def get_remaining_cards(cards: Cards, players: Tuple[Player, ...]):
         dealt_cards += list(player.cards)
     remaining_cards = set(cards.all_cards) - set(dealt_cards)
     return tuple(remaining_cards)
+
+
+def plug_in_rules(plug_in_rules: List[Tuple[str, Callable, int]], rule_register: RuleRegiser, rules: Rules):
+    for rule_name, rule, score in plug_in_rules:
+        rules.add_new_rule(rule_name, rule, score)
+    for rule_name, rule in rules.default_rules.items():
+        rule_register.add_a_rule(rule, rule_name)

@@ -1,0 +1,2 @@
+class InteractorABC:
+    pass

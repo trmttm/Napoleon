@@ -23,6 +23,6 @@ class Player:
         return f'{self._name}'
 
 
-def create_players(number_of_players) -> Tuple[Player]:
+def create_players(number_of_players) -> Tuple[Player, ...]:
     players = tuple(Player(n) for n in range(number_of_players))
     return players
