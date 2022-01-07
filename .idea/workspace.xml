@@ -3,11 +3,6 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="AutoTestManager">
-    <enabled-run-configurations>
-      <run-configuration type="tests" name="All_Tests" />
-    </enabled-run-configurations>
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="d89946b6-78c0-4478-8c36-da6a80bff2d9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +49,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.All_Tests">
+  <component name="RunManager" selected="Python tests.Python tests for test_napoleon.MyTestCase.test_main">
     <configuration name="All_Tests" type="tests" factoryName="Unittests">
       <module name="Napoleon" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -70,27 +65,27 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in test_napoleon.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_napoleon.MyTestCase.test_main" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Napoleon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/Tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/Tests/test_napoleon.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_napoleon.MyTestCase.test_main&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python tests.All_Tests" />
-      <item itemvalue="Python tests.Unittests in test_napoleon.py" />
+      <item itemvalue="Python tests.Python tests for test_napoleon.MyTestCase.test_main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests in test_napoleon.py" />
+        <item itemvalue="Python tests.Python tests for test_napoleon.MyTestCase.test_main" />
       </list>
     </recent_temporary>
   </component>
@@ -107,5 +102,16 @@
       <updated>1640889523210</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/Tests/test_napoleon.py</url>
+          <line>234</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

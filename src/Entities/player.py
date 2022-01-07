@@ -17,7 +17,7 @@ class Player:
 
     @property
     def cards(self) -> Iterable[Card]:
-        return self._cards
+        return sorted(self._cards)
 
     def __repr__(self) -> str:
         return f'{self._name}'

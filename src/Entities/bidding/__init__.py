@@ -20,8 +20,8 @@ class Bidding:
     def set_suit_weight(self, suit, weight: int):
         self._suit_weight[suit] = weight
 
-    def add_a_bid(self, player: Player, suit, minimum_face_cards: int):
-        new_bid = Bid(player, suit, minimum_face_cards)
+    def add_a_bid(self, player: Player, suit: str, minimum_face_cards: int):
+        new_bid = Bid(player, suit.strip(), minimum_face_cards)
         score = self._evaluate_bid(new_bid)
         if score > self._highest_score:
             self._bidding_data.append(new_bid)

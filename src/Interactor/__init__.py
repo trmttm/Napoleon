@@ -89,6 +89,7 @@ class Interactor:
 
     def play_card(self, game_round: int, player_: Player, card: Card):
         self.game.play_card(game_round, player_, card)
+        player_.set_cards(tuple(c for c in player_.cards if c != card))
 
     def get_played_cards(self, game_round: int) -> Tuple[Card, ...]:
         return self.game.get_played_cards(game_round)
